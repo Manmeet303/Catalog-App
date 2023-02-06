@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myfirstproject/Screen/Home_widgets/catalogHeader.dart';
-import 'package:myfirstproject/Screen/Home_widgets/catalogList.dart';
+import 'package:myfirstproject/widgets/Home_widgets/catalogHeader.dart';
+import 'package:myfirstproject/widgets/Home_widgets/catalogList.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'package:myfirstproject/models/catalog.dart';

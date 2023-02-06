@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myfirstproject/Screen/HomePage.dart';
-import 'package:myfirstproject/Screen/Home_widgets/catalogImage.dart';
+import 'package:myfirstproject/widgets/Home_widgets/catalogImage.dart';
 import 'package:myfirstproject/models/catalog.dart';
 import 'package:myfirstproject/widgets/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -17,7 +17,10 @@ class CatalogItem extends StatelessWidget {
     return VxBox(
         child: Row(
       children: [
-        CatalogImage(image: catalog.image),
+        // For Animation we added a Hero Widgets in which we had passed the tag which works as if we apply the same tag to 2 things then it will perform some animation
+        Hero(
+            tag: Key(catalog.id.toString()),
+            child: CatalogImage(image: catalog.image)),
         Expanded(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
