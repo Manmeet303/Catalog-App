@@ -15,13 +15,13 @@ class HomeDetailPage extends StatelessWidget {
       appBar: AppBar(
           title: Text(catalog.name,
               style: TextStyle(
-                  color: MyTheme.darkBluisColor, fontWeight: FontWeight.bold)),
+                  color: context.theme.hintColor, fontWeight: FontWeight.bold)),
           backgroundColor: Colors.transparent),
-      backgroundColor: MyTheme.creamColor,
+      backgroundColor: context.theme.canvasColor,
       // Copied the BottomBar from the catalogItem
       bottomNavigationBar: Container(
         // to disappear the Background color of the footer to white
-        color: Colors.white,
+        color: context.cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding: EdgeInsets.zero,
@@ -37,11 +37,11 @@ class HomeDetailPage extends StatelessWidget {
             ElevatedButton(
                     onPressed: () {},
                     style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(MyTheme.darkBluisColor),
+                        backgroundColor: MaterialStateProperty.all(
+                            context.theme.shadowColor),
                         shape: MaterialStateProperty.all(StadiumBorder())),
                     child: "Add to cart".text.lg.make())
-                .wh(110, 50)
+                .wh(120, 50)
           ],
         ).p24(),
       ),
@@ -58,12 +58,12 @@ class HomeDetailPage extends StatelessWidget {
             edge: VxEdge.TOP,
             height: 30.0,
             child: Container(
-                color: Colors.white,
+                color: context.theme.cardColor,
                 width: context.screenWidth,
                 child: Column(
                   children: [
                     catalog.name.text.bold.xl3
-                        .color(MyTheme.darkBluisColor)
+                        .color(context.theme.hintColor)
                         .make(),
                     catalog.desc.text.xl.textStyle(context.captionStyle).make(),
                   ],
