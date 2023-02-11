@@ -13,12 +13,10 @@ class HomeDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          catalog.name,
-          style: TextStyle(
-              color: MyTheme.darkBluisColor, fontWeight: FontWeight.bold),
-        ),
-      ),
+          title: Text(catalog.name,
+              style: TextStyle(
+                  color: MyTheme.darkBluisColor, fontWeight: FontWeight.bold)),
+          backgroundColor: Colors.transparent),
       backgroundColor: MyTheme.creamColor,
       // Copied the BottomBar from the catalogItem
       bottomNavigationBar: Container(
@@ -42,7 +40,7 @@ class HomeDetailPage extends StatelessWidget {
                         backgroundColor:
                             MaterialStateProperty.all(MyTheme.darkBluisColor),
                         shape: MaterialStateProperty.all(StadiumBorder())),
-                    child: "Buy".text.lg.make())
+                    child: "Add to cart".text.lg.make())
                 .wh(110, 50)
           ],
         ).p24(),
