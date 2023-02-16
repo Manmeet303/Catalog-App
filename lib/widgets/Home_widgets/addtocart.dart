@@ -17,6 +17,8 @@ class AddToCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // the below method is used to rebuild the entire tree after certain action
+    VxState.watch(context, on: [AddMutation, RemoveMutation]);
     final CartModel _cart = (VxState.store as MyStore).cart;
     // Applying check in such a way that if the item already exits in the cart than it will be true else false
     // note : we use widget.catalog as a parameter instead of normal catalg parameter coz we were using statefullwodget so...
@@ -25,13 +27,7 @@ class AddToCart extends StatelessWidget {
     return ElevatedButton(
         onPressed: () {
           if (!isInCart) {
-            isInCart = isInCart.toggle();
-            final _catalog = CatalogModel();
-            // Coz we had defined the set and get method so we need to add this
-            _cart.add(catalog);
-            _cart.catalog = _catalog;
-            // Adding the setState coz we are showing that after any performance the UI is rebuild
-            // setState(() {});
+            AddMutation(catalog);
           }
         },
         style: ButtonStyle(
