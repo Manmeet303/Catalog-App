@@ -38,11 +38,17 @@ class CartTotal extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          "\$${_cart.totalPrice}"
-              .text
-              .xl4
-              .color(context.theme.hintColor)
-              .make(),
+          // We can also Use VxConsumer instead of VxBuilder which is the combination of VxBuiler and VxNotification
+          VxBuilder(
+              // notifications: {},
+              builder: (context, store, status) {
+                return "\$${_cart.totalPrice}"
+                    .text
+                    .xl4
+                    .color(context.theme.hintColor)
+                    .make();
+              },
+              mutations: {RemoveMutation}),
           30.widthBox,
           ElevatedButton(
             onPressed: () {
@@ -67,6 +73,7 @@ class _CartList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    VxState.watch(context, on: [RemoveMutation]);
     final CartModel _cart = (VxState.store as MyStore).cart;
     // Now if there are no items in the cart or is empty than display the msg of nothing to show else display the items
     return _cart.items.isEmpty
@@ -82,12 +89,7 @@ class _CartList extends StatelessWidget {
               leading: Icon(Icons.done),
               trailing: IconButton(
                 icon: Icon(Icons.remove_circle),
-                onPressed: () {
-                  _cart.remove(_cart.items[index]);
-                  // Adding the setState coz we are showing that after any performance the UI is rebuild
-//commented below setstate coz now the above widget is no more statefull so...
-                  // setState(() {});
-                },
+                onPressed: () => RemoveMutation(_cart.items[index]),
               ),
               title: _cart.items[index].name.text.make(),
             ),
