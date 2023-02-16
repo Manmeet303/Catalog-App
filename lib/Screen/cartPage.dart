@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myfirstproject/core/store.dart';
 import 'package:myfirstproject/models/cart.dart';
 import 'package:myfirstproject/models/catalog.dart';
 import 'package:myfirstproject/widgets/theme.dart';
@@ -30,7 +31,7 @@ class CartPage extends StatelessWidget {
 class CartTotal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _cart = CartModel();
+    final CartModel _cart = (VxState.store as MyStore).cart;
 
     return SizedBox(
       height: 200,
@@ -61,27 +62,35 @@ class CartTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatefulWidget {
-  @override
-  State<_CartList> createState() => _CartListState();
-}
-
-class _CartListState extends State<_CartList> {
+class _CartList extends StatelessWidget {
   // creating the object of a cartmodel so that we can access all things of that mmodel directly
-  final _cart = CartModel();
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      // It means if the items are not null than display the items added as per the length
-      itemCount: _cart.items?.length,
-      itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.done),
-        trailing: IconButton(
-          icon: Icon(Icons.remove_circle),
-          onPressed: () {},
-        ),
-        title: _cart.items[index].name.text.make(),
-      ),
-    );
+    final CartModel _cart = (VxState.store as MyStore).cart;
+    // Now if there are no items in the cart or is empty than display the msg of nothing to show else display the items
+    return _cart.items.isEmpty
+        ? "Nothing to show"
+            .text
+            .color(context.theme.hintColor)
+            .xl2
+            .makeCentered()
+        : ListView.builder(
+            // It means if the items are not null than display the items added as per the length
+            itemCount: _cart.items?.length,
+            itemBuilder: (context, index) => ListTile(
+              leading: Icon(Icons.done),
+              trailing: IconButton(
+                icon: Icon(Icons.remove_circle),
+                onPressed: () {
+                  _cart.remove(_cart.items[index]);
+                  // Adding the setState coz we are showing that after any performance the UI is rebuild
+//commented below setstate coz now the above widget is no more statefull so...
+                  // setState(() {});
+                },
+              ),
+              title: _cart.items[index].name.text.make(),
+            ),
+          );
   }
 }
