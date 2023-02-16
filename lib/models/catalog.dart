@@ -2,12 +2,6 @@
 import 'dart:convert';
 
 class CatalogModel {
-// Creating a singleton of this model so that new objects or the objects refering  the same model can retrive the same current running object instead of always creating a new object
-  static final catalogModel = CatalogModel._internal();
-  CatalogModel._internal();
-  //The below line means that whenever you call the CatalogModel than we have to return this catalogModel object
-  factory CatalogModel() => catalogModel;
-
   // initially null items 0 items
   static List<Item> items;
   // = [

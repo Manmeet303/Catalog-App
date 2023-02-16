@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myfirstproject/models/catalog.dart';
+import 'package:myfirstproject/widgets/Home_widgets/addtocart.dart';
 import 'package:myfirstproject/widgets/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -34,13 +35,15 @@ class HomeDetailPage extends StatelessWidget {
                 .xl3
                 .red700
                 .make(),
-            ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            context.theme.shadowColor),
-                        shape: MaterialStateProperty.all(StadiumBorder())),
-                    child: "Add to cart".text.lg.make())
+            // Replaced the elevated button with used AddToCart widget button file of homepage over here so that at both the places it shows the same button
+            AddToCart(catalog: catalog)
+                // ElevatedButton(
+                //         onPressed: () {},
+                //         style: ButtonStyle(
+                //             backgroundColor: MaterialStateProperty.all(
+                //                 context.theme.shadowColor),
+                //             shape: MaterialStateProperty.all(StadiumBorder())),
+                //         child: "Add to cart".text.lg.make())
                 .wh(120, 50)
           ],
         ).p24(),
